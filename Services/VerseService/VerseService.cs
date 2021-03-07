@@ -7,13 +7,14 @@ using FavoriteVerse.Dtos.Verse;
 using FavoriteVerse.Models;
 using FavoriteVerse.Models.Local;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace FavoriteVerse.Services.VerseService
 {
     public class VerseService : IVerseService
     {
         private readonly KLoveVersesContext _context;
-         private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
         public VerseService(KLoveVersesContext context, IMapper mapper)
         {
             _context = context;
@@ -27,10 +28,11 @@ namespace FavoriteVerse.Services.VerseService
             favoriteVerse.DateAdded = DateTime.Now;
             try{
                 var response = await _context.TbFavoriteVerses.AddAsync(favoriteVerse);
-                serviceResponse.Data = _mapper.Map<TbFavoriteVerse>(response);
+                serviceResponse.Data = _mapper.Map<TbFavoriteVerse>(response.Entity);
+                await _context.SaveChangesAsync();
             }catch(Exception ex){
                 serviceResponse.Data = null;
-                serviceResponse.Message = ex.Message;
+                serviceResponse.Message = ex.Message + JsonConvert.SerializeObject(serviceResponse.Data);
                 serviceResponse.Success = false;
             }
 
@@ -44,6 +46,7 @@ namespace FavoriteVerse.Services.VerseService
                 TbFavoriteVerse verse = await _context.TbFavoriteVerses.FirstOrDefaultAsync(v => v.Id == Id);
                 _context.Remove(verse);
                 serviceResponse.Data = true;
+                await _context.SaveChangesAsync();
             }catch(Exception ex){
                 serviceResponse.Data = false;
                 serviceResponse.Success = false;
@@ -57,7 +60,13 @@ namespace FavoriteVerse.Services.VerseService
         public async Task<ServiceResponse<List<TbFavoriteVerse>>> GetAllFavorites()
         {
             ServiceResponse<List<TbFavoriteVerse>> serviceResponse = new ServiceResponse<List<TbFavoriteVerse>>();
-            serviceResponse.Data =   await _context.TbFavoriteVerses.ToListAsync();
+            try{
+                serviceResponse.Data =   await _context.TbFavoriteVerses.ToListAsync();
+            }catch(Exception ex){
+                serviceResponse.Message = ex.Message;
+                serviceResponse.Data = null;
+                serviceResponse.Success = false;
+            }
             return serviceResponse;
         }
     }

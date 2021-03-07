@@ -49,6 +49,7 @@ namespace FavoriteVerse
             services.AddAutoMapper(typeof(Startup));
             services.AddRazorPages();
             services.AddHttpClient();
+            services.AddMvc();
 
             //to pass K-Love API settings to HTTPClient
             services.AddHttpClient("KLoveAPIClient", c => {

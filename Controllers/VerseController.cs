@@ -10,8 +10,8 @@ namespace FavoriteVerse.Controllers
     [Route("verse")]
     public class VerseController : ControllerBase
     {
-        private readonly VerseService _service;
-        public VerseController(VerseService service)
+        private readonly IVerseService _service;
+        public VerseController(IVerseService service)
         {
             _service = service;
         }
