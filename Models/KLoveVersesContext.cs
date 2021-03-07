@@ -1,4 +1,5 @@
 ﻿using System;
+using FavoriteVerse.Models.Local;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -8,32 +9,23 @@ namespace FavoriteVerse.Models
 {
     public partial class KLoveVersesContext : DbContext
     {
-        // public KLoveVersesContext()
-        // {
-        // }
-
         public KLoveVersesContext(DbContextOptions options)
             : base(options)
         {
         }
 
-        public virtual DbSet<FavoriteVerse> FavoriteVerses { get; set; }
-
-//         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//         {
-// //             if (!optionsBuilder.IsConfigured)
-// //             {
-// // #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-// //                 optionsBuilder.UseSqlServer("Data Source=favoriteverse.database.windows.net;Initial Catalog=KLoveVerses;User Id=favoriteverse;Password=t@estUser2021@");
-// //             }
-//         }
+        public virtual DbSet<TbFavoriteVerse> TbFavoriteVerses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
-            modelBuilder.Entity<FavoriteVerse>(entity =>
+            modelBuilder.Entity<TbFavoriteVerse>(entity =>
             {
+                entity.ToTable("tbFavoriteVerses");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
                 entity.Property(e => e.BibleReferenceLink).HasMaxLength(1000);
 
                 entity.Property(e => e.Book).HasMaxLength(1000);
@@ -42,11 +34,19 @@ namespace FavoriteVerse.Models
 
                 entity.Property(e => e.ImageLink).HasMaxLength(1000);
 
+                entity.Property(e => e.PinterestShareUrl)
+                    .IsRequired()
+                    .HasMaxLength(1000);
+
                 entity.Property(e => e.ReferenceLink).HasMaxLength(1000);
 
                 entity.Property(e => e.ReferenceText).HasMaxLength(1000);
 
                 entity.Property(e => e.TwitterShareUrl).HasMaxLength(1000);
+
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.VerseDate).HasColumnType("datetime");
 
@@ -59,7 +59,6 @@ namespace FavoriteVerse.Models
 
             OnModelCreatingPartial(modelBuilder);
         }
-
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

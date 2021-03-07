@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace FavoriteVerse.Models
+namespace FavoriteVerse.Models.Local
 {
-    public partial class FavoriteVerse
+    public partial class TbFavoriteVerse
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string VerseText { get; set; }
         public string ImageLink { get; set; }
         public DateTime? VerseDate { get; set; }
@@ -20,6 +20,9 @@ namespace FavoriteVerse.Models
         public string BibleReferenceLink { get; set; }
         public string FacebookShareUrl { get; set; }
         public string TwitterShareUrl { get; set; }
+        public string PinterestShareUrl { get; set; }
         public bool IsValid { get; set; }
+        public string UserId { get; set; }
+        public DateTime DateAdded { get; set; }
     }
 }

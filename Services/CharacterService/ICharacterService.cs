@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using FavoriteVerse.Dtos.Character;
 using FavoriteVerse.Models;
+using FavoriteVerse.Models.Local;
 
 namespace FavoriteVerse.Services.CharacterService
 {
@@ -12,7 +13,7 @@ namespace FavoriteVerse.Services.CharacterService
         Task<ServiceResponse<List<GetCharacterDto>>> AddCharacter(AddCharacterDto newCharacter);
         Task<ServiceResponse<GetCharacterDto>> UpdateCharacter(UpdateCharacterDto updatedCharacter);
         Task<ServiceResponse<List<GetCharacterDto>>> DeleteCharacter(int id);
-        Task<ServiceResponse<List<Models.FavoriteVerse>>> GetFavoriteVerses();
+        Task<ServiceResponse<List<TbFavoriteVerse>>> GetFavoriteVerses();
     }
 
 }

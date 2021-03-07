@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FavoriteVerse.Dtos.Character;
 using FavoriteVerse.Models;
+using FavoriteVerse.Models.Local;
 
 namespace FavoriteVerse.Services.CharacterService
 {
@@ -35,15 +36,10 @@ namespace FavoriteVerse.Services.CharacterService
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<Models.FavoriteVerse>>> GetFavoriteVerses()
+        public async Task<ServiceResponse<List<TbFavoriteVerse>>> GetFavoriteVerses()
         {
-            List<Models.FavoriteVerse> result=null;
-               
-                   result = _context.FavoriteVerses.ToList();
-                
-            ServiceResponse<List<Models.FavoriteVerse>> serviceResponse = new ServiceResponse<List<Models.FavoriteVerse>>();
-            
-            serviceResponse.Data = result;
+            ServiceResponse<List<TbFavoriteVerse>> serviceResponse = new ServiceResponse<List<TbFavoriteVerse>>();
+            serviceResponse.Data = _context.TbFavoriteVerses.ToList();
             return serviceResponse;
         }
 

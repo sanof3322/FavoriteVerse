@@ -15,6 +15,10 @@ using Microsoft.OpenApi.Models;
 using AutoMapper;
 using FavoriteVerse.Models;
 using Microsoft.EntityFrameworkCore;
+using FavoriteVerse.Services.KLoveAPIService;
+using favoriteverse.Services.KLoveAPIService;
+using System.Text.Json;
+using FavoriteVerse.Services.VerseService;
 
 namespace FavoriteVerse
 {
@@ -40,9 +44,20 @@ namespace FavoriteVerse
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FavoriteVerse", Version = "v1" });
             });
             services.AddScoped<ICharacterService, CharacterService>();
+            services.AddScoped<IKLoveAPIService, KLoveAPIService>();
+            services.AddScoped<IVerseService, VerseService>();
             services.AddAutoMapper(typeof(Startup));
             services.AddRazorPages();
             services.AddHttpClient();
+
+            //to pass K-Love API settings to HTTPClient
+            services.AddHttpClient("KLoveAPIClient", c => {
+                c.BaseAddress = new Uri(Configuration.GetValue<string>("KLoveAPIURL"));
+                c.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", Configuration.GetValue<string>("KLoveSubscriptionKey"));
+            });
+
+            //to fix camelCasing issue
+            services.AddControllers().AddJsonOptions(option => option.JsonSerializerOptions.PropertyNamingPolicy = null);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,14 +79,8 @@ namespace FavoriteVerse
             app.UseRouting();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints => { endpoints.MapRazorPages(); });
         }
     }
 }

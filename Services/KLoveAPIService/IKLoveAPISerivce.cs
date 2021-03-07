@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using FavoriteVerse.Models;
@@ -7,6 +8,6 @@ namespace FavoriteVerse.Services.KLoveAPIService
 {
     public interface IKLoveAPIService
     {
-         Task<ServiceResponse<List<KLoveVerses>>> GetAllCharacters();
+        Task<ServiceResponse<KLoveVersesWrapper>> GetVerseByDate(DateTime startdate, int PageSize);
     }
 }
