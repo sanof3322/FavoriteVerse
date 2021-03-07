@@ -1,23 +1,14 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FavoriteVerse.Services.CharacterService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using AutoMapper;
 using FavoriteVerse.Models;
 using Microsoft.EntityFrameworkCore;
 using FavoriteVerse.Services.KLoveAPIService;
 using favoriteverse.Services.KLoveAPIService;
-using System.Text.Json;
 using FavoriteVerse.Services.VerseService;
 
 namespace FavoriteVerse
@@ -43,7 +34,6 @@ namespace FavoriteVerse
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FavoriteVerse", Version = "v1" });
             });
-            services.AddScoped<ICharacterService, CharacterService>();
             services.AddScoped<IKLoveAPIService, KLoveAPIService>();
             services.AddScoped<IVerseService, VerseService>();
             services.AddAutoMapper(typeof(Startup));

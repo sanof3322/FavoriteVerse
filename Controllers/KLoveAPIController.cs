@@ -1,10 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using FavoriteVerse.Dtos.Character;
-using FavoriteVerse.Models;
-using FavoriteVerse.Services.CharacterService;
 using FavoriteVerse.Services.KLoveAPIService;
 using Microsoft.AspNetCore.Mvc;
 
