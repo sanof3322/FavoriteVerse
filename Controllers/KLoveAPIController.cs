@@ -15,6 +15,12 @@ namespace FavoriteVerse.Controllers
             _kLoveAPIService = kLoveService;
         }
 
+        /// <summary>
+        /// Gets verses from K-Love's API
+        /// </summary>
+        /// <param name="startdate">Start Date</param>
+        /// <param name="PageSize">Number of Verses to Show</param>
+        /// <returns></returns>
         [Route("verses")]
         public async Task<IActionResult> Get(DateTime startdate, int PageSize){
             return Ok(await _kLoveAPIService.GetVerseByDate(startdate, PageSize));

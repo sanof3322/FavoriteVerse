@@ -16,11 +16,21 @@ namespace FavoriteVerse.Controllers
             _service = service;
         }
         
+        /// <summary>
+        /// Adds a verse to favorites
+        /// </summary>
+        /// <param name="verse">Verse DTO</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Add(AddVerseDTO verse){
             return Ok(await _service.Add(verse));
         }
 
+        /// <summary>
+        /// Removes a verse from favorites
+        /// </summary>
+        /// <param name="Id">Id of a verse</param>
+        /// <returns></returns>
         [HttpDelete]
         public async Task<IActionResult> Delete(Guid Id){
             return Ok(await _service.Delete(Id));

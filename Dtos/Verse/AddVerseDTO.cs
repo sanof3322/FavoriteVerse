@@ -1,7 +1,9 @@
 using System;
 
 namespace FavoriteVerse.Dtos.Verse
-{
+{   /// <summary>
+    /// Used to transfer data from UI to AddVerse Service
+    /// </summary>
     public class AddVerseDTO
     {
         public Guid Id { get; set; }

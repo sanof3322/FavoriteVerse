@@ -248,8 +248,9 @@ const app = {
         }else{
             this.model.isLoading = true;
             this.compile();
+            const UserId = this.cookies.getCookie("userId");
 
-            this.api("favorite-verses", {}, "Get", (data) => {    
+            this.api(`favorite-verses?UserId=${UserId}`, {}, "Get", (data) => {    
                 //console.log(data.Data);            
                 this.model.showFavorites = true;
                 this.model.isLoading = false;

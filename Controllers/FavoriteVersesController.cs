@@ -17,9 +17,12 @@ namespace FavoriteVerses.Controllers
             _service = service;
             _kLoveAPIService = kLoveAPIService;
         }
-
-        public async Task<IActionResult> Get(){
-            return Ok(await _service.GetAllFavorites());
+        /// <summary>
+        /// Used to get favorite verses based on UserId
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> Get(string UserId){
+            return Ok(await _service.GetAllFavorites(UserId));
         }
     }
 }

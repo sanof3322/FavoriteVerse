@@ -97,7 +97,8 @@ var app = {
     } else {
       this.model.isLoading = true;
       this.compile();
-      this.api("favorite-verses", {}, "Get", function (data) {
+      var UserId = this.cookies.getCookie("userId");
+      this.api("favorite-verses?UserId=".concat(UserId), {}, "Get", function (data) {
         //console.log(data.Data);            
         _this2.model.showFavorites = true;
         _this2.model.isLoading = false;

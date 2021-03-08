@@ -5,6 +5,9 @@ using Newtonsoft.Json.Serialization;
 
 namespace FavoriteVerse.Models.External
 {
+    /// <summary>
+    /// Wraps the data that comes from K-Love API
+    /// </summary>
     public class KLoveVersesWrapper
     {
         public List<KLoveVerse> Verses { get; set; }

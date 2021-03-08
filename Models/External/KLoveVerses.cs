@@ -2,6 +2,9 @@ using System;
 
 namespace FavoriteVerse.Models.External
 {
+    /// <summary>
+    /// Single Verse object that comes from K-Love API
+    /// </summary>
     public class KLoveVerse
     {
         public Guid Id { get; set; }

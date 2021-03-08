@@ -19,7 +19,13 @@ namespace favoriteverse.Services.KLoveAPIService
             _mapper = mapper;
             _client = client;
         }
-        
+
+        /// <summary>
+        /// Gets verses from K-Love API
+        /// </summary>
+        /// <param name="startdate">Start date</param>
+        /// <param name="PageSize">Number of verses to show</param>
+        /// <returns>Collection of verses</returns>
         public async Task<ServiceResponse<KLoveVersesWrapper>> GetVerseByDate(DateTime startdate, int PageSize)
         {
             ServiceResponse<KLoveVersesWrapper> serviceResponse = new ServiceResponse<KLoveVersesWrapper>();
