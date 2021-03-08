@@ -1,0 +1,18 @@
+$primary:#00adef;
+$secondary: #0077a4;
+$pink: #df4b8e;
+$danger: red;
+
+body{
+    font-family: Montserrat, serif;
+    font-weight: 900;
+    color: $primary;
+}
+
+footer{
+    padding-top: 115px;
+    text-transform: uppercase;
+    height: 180px;
+    color: #fff;
+    background: #fff url("../img/footer.svg") no-repeat top center;
+}
