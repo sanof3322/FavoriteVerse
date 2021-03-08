@@ -2,6 +2,12 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Daily Verses";
+    string baseUrl = string.Format("{0}://{1}{2}", Request.Scheme, Request.Host, Request.PathBase);
 }
 
 <div id="template"></div>
+<script>
+    var JSSettings = {
+        baseURL: "@baseUrl"
+    };
+</script>
